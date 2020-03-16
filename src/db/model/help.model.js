@@ -10,15 +10,44 @@ module.exports = (sequelize) => {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4
     },
-    type: Sequelize.ENUM('need', 'offer'),
-    title: Sequelize.STRING,
-    description: Sequelize.STRING,
-    fullAddress: Sequelize.STRING,
-    geoLat: Sequelize.STRING,
-    geoLong: Sequelize.STRING,
-    contactPerson: Sequelize.STRING,
-    contactNumber: Sequelize.STRING,
-    contactFacebook: Sequelize.STRING,
+    type: {
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+      type: Sequelize.ENUM('need', 'offer'),
+    },
+    title: {
+      allowNull: false,
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    description: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    contactPerson: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    contactNumber: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    contactFacebook: {
+      type: Sequelize.STRING,
+    },
   },
   {
     modelName: 'help',

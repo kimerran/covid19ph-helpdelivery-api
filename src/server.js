@@ -18,6 +18,16 @@ const controllers = (new Controllers(dbModels)).initializeControllers()
 const Router = require('./router')
 const routers = (new Router(controllers)).initializeRouters()
 
+const whitelist = ['http://localhost:3000', 'https://help.covid19ph.net']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 const app = express()
 app.use(cors())

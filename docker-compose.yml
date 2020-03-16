@@ -1,0 +1,24 @@
+version: "2.1"
+
+services:
+  app:
+    image: kimerran/help-api
+    restart: always
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./db.sequelite/:/app/db.sequelite
+  
+    networks:
+      - web
+    expose:
+      - "8080"
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.basic.frontend.rule=Host:help-api.covid19ph.net"
+      - "traefik.basic.port=8080"
+      - "traefik.basic.protocol=http"
+networks:
+  web:
+    external: true

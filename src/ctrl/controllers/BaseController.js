@@ -4,9 +4,12 @@ module.exports = class BaseController {
   }
 
   async create(entity) {
-    console.log('createing entity', entity)
-    const newEntity = await this.baseModel.create(entity)
-    return newEntity
+    try {
+      const newEntity = await this.baseModel.create(entity)
+      return newEntity
+    } catch (error) {
+      throw error
+    }
   }
 
   async update(id, updates) {

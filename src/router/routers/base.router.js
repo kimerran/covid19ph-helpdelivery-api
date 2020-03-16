@@ -17,8 +17,14 @@ module.exports = class BaseRouter {
 
   async _create(req, res, next) {
     // this.logger.debug('req.body', req.body)
-    const entity = await this.baseController.create(req.body)
-    res.json(entity)
+    try {
+      const entity = await this.baseController.create(req.body)
+      res.json(entity)
+    } catch (error) {
+      console.log(error)
+      res.status(400).json(error)
+    }
+
   }
 
   async _update(req, res, next) {
