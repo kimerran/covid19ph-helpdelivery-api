@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize')
-const { Model } = Sequelize
+// import node-modules
+const Sequelize = require('sequelize');
+const { Model } = Sequelize;
 
 class HelpModel extends Model {}
 
@@ -8,23 +9,44 @@ module.exports = (sequelize) => {
     id: {
       primaryKey: true,
       type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: Sequelize.UUIDV4,
     },
     type: {
-      allowNull: false,
-      validate: {
-        notEmpty: false,
-      },
       type: Sequelize.ENUM('need', 'offer'),
-    },
-    title: {
       allowNull: false,
-      type: Sequelize.STRING,
       validate: {
         notEmpty: false,
       },
     },
-    description: {
+    item: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    amount: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: true,
+      },
+    },
+    locCity: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    locBarangay: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+      },
+    },
+    locOther: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
@@ -54,8 +76,10 @@ module.exports = (sequelize) => {
     underscored: true,
     tableName: 'help',
     sequelize
-  })
-  return HelpModel
+  });
+
+  return HelpModel;
 }
 
+// docs say import is deprecated (do not use).
 // try https://sequelize.org/master/manual/models-definition.html#import
